@@ -24,7 +24,7 @@ For instance, Windows forbids characters like `?` and `:` in filenames, forcing 
   pip install pymongo python-dotenv
   ```
 
-Quick Start
+## Quick Start
 1. Clone the repository:
 ```bash
 git clone [https://github.com/yourusername/lyrics-align.git](https://github.com/yourusername/lyrics-align.git)
@@ -49,7 +49,7 @@ python fast_update.py
 4. Review Output:
 The terminal will provide a detailed log indicating successful seamless updates, files skipped due to missing initial database records, or warnings for multiple fuzzy matches requiring manual review.
 
-📂 Project Structure
+## 📂 Project Structure
 fast_update.py: Core synchronization script utilizing Regex fuzzy matching.
 
 fix_lyrics_names.py: Initial database seeding and sanitization script.
