@@ -7,3 +7,5 @@ __pycache__/
 
 # 如果你不想把生出來的 txt 和 lrc 推上 GitHub，也可以直接忽略整個資料夾
 downloads/
+
+separated_vocals/

@@ -24,7 +24,7 @@ For instance, Windows forbids characters like `?` and `:` in filenames, forcing 
   pip install pymongo python-dotenv
   ```
 
-Quick Start
+## Quick Start
 1. Clone the repository:
 ```bash
 git clone [https://github.com/yourusername/lyrics-align.git](https://github.com/yourusername/lyrics-align.git)
@@ -50,16 +50,20 @@ python fast_update.py
 The terminal will provide a detailed log indicating successful seamless updates, files skipped due to missing initial database records, or warnings for multiple fuzzy matches requiring manual review.
 
 📂 Project Structure
-fast_update.py: Core synchronization script utilizing Regex fuzzy matching.
+aligner.py: The core AI pipeline (Whisper + Demucs) for generating highly accurate .lrc files.
+
+fast_update.py: Synchronization script utilizing Regex fuzzy matching.
 
 fix_lyrics_names.py: Initial database seeding and sanitization script.
 
-downloader.py: Download the .wav file from youtube in urls.txt
+downloader.py: Downloads .wav audio files from YouTube based on urls.txt.
 
-editor.py: Tools for database
+editor.py: Utility tools for direct database management.
 
-lyrics_scraper.py: Scrap lyrics by name with https://www.uta-net.com/
+lyrics_scraper.py: Scrapes raw text lyrics from https://www.uta-net.com/.
 
-add_intro_notes.py: Add an intro note if the song has intro
+add_intro_notes.py: Automatically injects intro metadata for compatible tracks.
 
-/downloads/: Target directory for local .lrc files to be processed.
+/downloads/: Target directory for audio processing and local .lrc storage.
+
+/separated_vocals/: Cache directory for Demucs vocal stems to speed up re-alignments.
