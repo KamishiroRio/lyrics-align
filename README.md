@@ -4,6 +4,18 @@ A suite of Python automation scripts designed to process, clean, and synchronize
 
 ## 📖 Overview
 
+```mermaid
+flowchart LR
+    A[🎵 Audio File .wav] --> C[Demucs Model\nAudio Separation]
+    B[📄 Raw Lyrics .txt] --> D[Whisper Model\nTranscription & Alignment]
+    
+    C -- Isolated Vocals --> D
+    D -- Word-level Timestamps --> E([✅ Aligned .lrc File])
+    
+    style C fill:#8a2be2,color:#fff,stroke:#fff,stroke-width:2px
+    style D fill:#8a2be2,color:#fff,stroke:#fff,stroke-width:2px
+```
+
 When building a custom lyrics database, developers often face a classic issue: **Operating System filename limitations vs. Official API metadata**. 
 For instance, Windows forbids characters like `?` and `:` in filenames, forcing users to save files with full-width characters (e.g., `BURN：BORN`, `Dou-Da？ DOING!`). However, official APIs (like iTunes or Spotify) use standard half-width characters (`BURN:BORN`). This discrepancy causes standard database lookups to fail.
 
