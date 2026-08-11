@@ -50,9 +50,7 @@ python fast_update.py
 The terminal will provide a detailed log indicating successful seamless updates, files skipped due to missing initial database records, or warnings for multiple fuzzy matches requiring manual review.
 
 📂 Project Structure
-aligner.py: The core AI pipeline (Whisper + Demucs) for generating highly accurate .lrc files.
-
-fast_update.py: Synchronization script utilizing Regex fuzzy matching.
+fast_update.py: Core synchronization script utilizing Regex fuzzy matching.
 
 fix_lyrics_names.py: Initial database seeding and sanitization script.
 
