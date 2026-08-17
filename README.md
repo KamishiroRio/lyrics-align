@@ -38,16 +38,41 @@ flowchart TD
 
 ---
 
-## ⚙️ Core Pipeline Components
+---
 
-### 1. Audio Separation & Transcription Engine
-* **Vocal Isolation (Demucs):** Extracts clean vocal stems from raw audio, eliminating instrumental interference to improve transcription accuracy.
-* **Cached Stem Storage (`/separated_vocals/`):** Persists processed audio stems locally to accelerate subsequent alignment iterations and minimize redundant GPU computation.
-* **Word-Level Alignment (Whisper):** Combines isolated vocals with reference lyrics to generate high-precision timestamps in `.lrc` format.
+## 🚀 Data Ingestion Workflow
 
-### 2. ETL & Metadata Normalization (`fast_update.py`, `fix_lyrics_names.py`)
-* **Unicode & Full-Width Sanitization:** Automatically normalizes encoding discrepancies (such as full-width vs. half-width symbols and OS-restricted characters) between local file naming conventions and streaming metadata.
-* **Regex-Based Record Matching:** Resolves edge-case naming mismatches through dynamic pattern matching, ensuring reliable database updates without manual intervention.
+This repository utilizes a modular, step-by-step pipeline to process audio and lyrics. To ingest new tracks:
+
+1. **Audio Acquisition:**
+   Add target YouTube links to `urls.txt`. Run the downloader to fetch `.wav` files into the `./downloads/` directory (you will need to create this directory if it doesn't exist).
+   ```bash
+   python downloader.py
+   ```
+
+2. **Lyrics Scraping (Interactive):**
+   Fetch raw lyric `.txt` files based on song titles. This script includes an interactive prompt in the terminal to ensure accurate lyric mapping.
+   ```bash
+   python lyrics_scraper.py
+   ```
+
+3. **AI Alignment (The Core Engine):**
+   Execute the main alignment logic. This script runs Demucs (for vocal isolation) and Whisper (for timestamping) on the files in `./downloads/`, outputting the perfectly aligned `.lrc` files.
+   ```bash
+   python aligner.py
+   ```
+
+4. **Intro Adjustment (Optional):**
+   If the track has a long instrumental intro, run this utility to inject introductory timing offsets and metadata.
+   ```bash
+   python add_intro_notes.py
+   ```
+
+5. **Database Ingestion:**
+   Sync the generated `.lrc` files to your MongoDB cluster. The script handles regex fuzzy matching for any local vs. database naming discrepancies.
+   ```bash
+   python fast_update.py
+   ```
 
 ---
 
@@ -55,16 +80,16 @@ flowchart TD
 
 | File / Directory | Description |
 | :--- | :--- |
-| `fast_update.py` | Core ETL script handling local `.lrc` parsing, fuzzy matching, and MongoDB updates. |
+| `aligner.py` | **Core Engine:** Orchestrates Demucs and Whisper for `.wav` to `.lrc` alignment. |
+| `fast_update.py` | ETL script handling local `.lrc` parsing, regex fuzzy matching, and MongoDB updates. |
+| `downloader.py` | Audio acquisition script that reads from `urls.txt`. |
+| `lyrics_scraper.py` | Interactive scraper for extracting structured lyric text from web sources. |
+| `add_intro_notes.py` | Utility to inject introductory timing offsets for specific tracks. |
 | `fix_lyrics_names.py` | Database seeding and track title sanitization utility. |
-| `downloader.py` | Audio acquisition script for target source tracks. |
-| `lyrics_scraper.py` | Automated scraper for structured lyric text extraction. |
-| `editor.py` | Database inspection and document management interface. |
-| `add_intro_notes.py` | Utility to inject introductory timing offsets and metadata into track records. |
-| `/downloads/` | Working directory for incoming audio files and generated `.lrc` outputs. |
-| `/separated_vocals/` | Cache storage for separated vocal audio stems. |
-
----
+| `editor.py` | Database inspection and remote document management interface. |
+| `urls.txt` | Target list of YouTube URLs for audio acquisition. |
+| `/downloads/` | *(User-created)* Working directory for incoming audio, raw text, and `.lrc` outputs. |
+| `/separated_vocals/` | *(Auto-generated)* Cache storage for Demucs vocal audio stems. |
 
 ## 🛠️ Tech Stack & Dependencies
 
