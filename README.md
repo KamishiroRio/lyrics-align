@@ -40,6 +40,20 @@ flowchart TD
 
 ---
 
+---
+
+## 🔐 Environment Setup
+
+This pipeline uses a **Bring Your Own Database (BYOD)** approach. You must configure your own MongoDB instance to store the generated `.lrc` metadata.
+
+1. Create a `.env` file in the root directory.
+2. Add your MongoDB connection URI:
+   ```env
+   MONGO_URI=mongodb+srv://<your_username>:<your_password>@cluster.mongodb.net/?retryWrites=true&w=majority
+   ```
+*(Note: Do not commit your `.env` file to version control. It is already included in the `.gitignore`.)*
+
+
 ## 🚀 Data Ingestion Workflow
 
 This repository utilizes a modular, step-by-step pipeline to process audio and lyrics. To ingest new tracks:
