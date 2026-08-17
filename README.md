@@ -104,7 +104,7 @@ This repository utilizes a modular, step-by-step pipeline to process audio and l
 | `fix_lyrics_names.py` | Database seeding and track title sanitization utility. |
 | `editor.py` | Database inspection and remote document management interface. |
 | `urls.txt` | Target list of YouTube URLs for audio acquisition. |
-| `/downloads/` | *(User-created)* Working directory for incoming audio, raw text, and `.lrc` outputs. |
+| `/downloads/` | *(Auto-generated)* Working directory for incoming audio, raw text, and `.lrc` outputs. |
 | `/separated_vocals/` | *(Auto-generated)* Cache storage for Demucs vocal audio stems. |
 
 ## 🛠️ Tech Stack & Dependencies
