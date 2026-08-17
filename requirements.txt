@@ -1,0 +1,5 @@
+yt-dlp
+beautifulsoup4
+stable-ts
+demucs
+torch

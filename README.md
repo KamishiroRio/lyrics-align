@@ -53,6 +53,8 @@ This pipeline uses a **Bring Your Own Database (BYOD)** approach. You must confi
    ```
 *(Note: Do not commit your `.env` file to version control. It is already included in the `.gitignore`.)*
 
+## ⚙️ System Requirements
+This pipeline heavily relies on audio processing. You **must** have [FFmpeg](https://ffmpeg.org/download.html) installed on your system and added to your system's PATH.
 
 ## 🚀 Data Ingestion Workflow
 
